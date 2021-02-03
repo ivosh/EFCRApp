@@ -1,10 +1,11 @@
-package com.rheagroup.efcr.app
+package com.rheagroup.efcr.app.ui.message
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import com.rheagroup.efcr.app.R
 
 class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +13,7 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun sendMessage(view: View) {
+    fun sendMessage(@Suppress("UNUSED_PARAMETER") view: View) {
         val editText = findViewById<EditText>(R.id.editText)
         val message = editText.text.toString();
 
