@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">E-FCR App</string>
+    <string name="echo_logo_drawable_description">ECHO logo</string>
+    <string name="echo_logo_title">ECHO</string>
+    <string name="echo_logo_text">European network of cybersecurity centres and competence hub for innovation and operations</string>
+
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
 </resources>
