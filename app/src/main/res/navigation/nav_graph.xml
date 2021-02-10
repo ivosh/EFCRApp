@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/sendMessageFragment">
+
+    <fragment
+        android:id="@+id/sendMessageFragment"
+        android:name="com.rheagroup.efcr.app.ui.message.SendMessageFragment"
+        android:label="send_message"
+        tools:layout="@layout/send_message">
+        <action
+            android:id="@+id/action_sendMessage"
+            app:destination="@id/displayMessageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/displayMessageFragment"
+        android:name="com.rheagroup.efcr.app.ui.message.DisplayMessageFragment"
+        android:label="display_message"
+        tools:layout="@layout/display_message" >
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </fragment>
+</navigation>
