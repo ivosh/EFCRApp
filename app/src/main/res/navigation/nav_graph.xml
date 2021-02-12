@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/sendMessageFragment">
+    app:startDestination="@id/serviceRequestListFragment">
+
+    <fragment
+        android:id="@+id/serviceRequestListFragment"
+        android:name="com.rheagroup.efcr.app.ui.servicerequest.ServiceRequestListFragment"
+        android:label="service_request_list"
+        tools:layout="@layout/service_requests_list" />
 
     <fragment
         android:id="@+id/sendMessageFragment"

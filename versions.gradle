@@ -9,14 +9,15 @@ versions.espresso = "3.3.0"
 versions.junit = "4.13.1"
 versions.material = "1.3.0"
 versions.navigation = "2.3.3"
+versions.room = "2.2.6"
 ext.versions = versions
 
 // Build versions
 def build_versions = [:]
-build_versions.min_sdk = 29
-build_versions.compile_sdk = 30
-build_versions.target_sdk = 30
 build_versions.build_tools = "30.0.3"
+build_versions.compile_sdk = 30
+build_versions.min_sdk = 29
+build_versions.target_sdk = 30
 ext.build_versions = build_versions
 
 
@@ -45,6 +46,11 @@ def navigation = [:]
 navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
 navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
 deps.navigation = navigation
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+deps.room = room
 
 ext.deps = deps
 

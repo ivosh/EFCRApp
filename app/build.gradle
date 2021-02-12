@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -42,11 +44,12 @@ dependencies {
     implementation deps.core_ktx
     implementation deps.material
     implementation deps.navigation.fragment_ktx
+    implementation deps.room.runtime
+
+    kapt deps.room.compiler
 
     testImplementation deps.junit
 
     androidTestImplementation deps.atsl.ext_junit
     androidTestImplementation deps.espresso.core
 }
-
-apply plugin: 'androidx.navigation.safeargs.kotlin'
