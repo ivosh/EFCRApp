@@ -12,7 +12,9 @@
         tools:layout="@layout/send_message">
         <action
             android:id="@+id/action_sendMessage"
-            app:destination="@id/displayMessageFragment" />
+            app:destination="@id/displayMessageFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
