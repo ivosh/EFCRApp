@@ -3,9 +3,8 @@ package com.rheagroup.efcr.app.ui.servicerequest
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.rheagroup.efcr.app.repository.ServiceRequestRepository
-import com.rheagroup.efcr.app.vo.ServiceRequest
+import com.rheagroup.efcr.app.model.ServiceRequest
 
 class ServiceRequestListViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = ServiceRequestRepository(application) // :TODO: Use Dependency Injection

@@ -1,4 +1,4 @@
-package com.rheagroup.efcr.app.vo
+package com.rheagroup.efcr.app.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
@@ -12,6 +12,7 @@ data class ServiceRequest(
         @PrimaryKey val id: String, // is UUID
         val name: String,
         val date: LocalDateTime,
+        val status: String,
         @Embedded(prefix = "customer_") val customer: Customer,
         @Embedded(prefix = "provider_") val provider: Provider
 )

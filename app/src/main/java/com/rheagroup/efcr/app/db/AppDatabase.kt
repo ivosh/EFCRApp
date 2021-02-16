@@ -7,15 +7,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.rheagroup.efcr.app.vo.Customer
-import com.rheagroup.efcr.app.vo.ProvidedBy
-import com.rheagroup.efcr.app.vo.ProvidedByConverter
-import com.rheagroup.efcr.app.vo.Provider
-import com.rheagroup.efcr.app.vo.ServiceRequest
+import com.rheagroup.efcr.app.model.Customer
+import com.rheagroup.efcr.app.model.ProvidedBy
+import com.rheagroup.efcr.app.model.ProvidedByConverter
+import com.rheagroup.efcr.app.model.Provider
+import com.rheagroup.efcr.app.model.ServiceRequest
 import java.time.LocalDateTime
 import java.util.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @Database(
         entities = [ServiceRequest::class],
@@ -73,10 +71,10 @@ val PROVIDER_3 = Provider(ProvidedBy.SINGLE_PROVIDER, UUID.randomUUID().toString
 val PROVIDER_4 = Provider(ProvidedBy.SINGLE_PROVIDER, UUID.randomUUID().toString(), "Exprivia")
 
 val SERVICE_REQUESTS = arrayOf(
-        ServiceRequest(UUID.randomUUID().toString(), "Custom Service Request for Training", LocalDateTime.now(), CUSTOMER_1, PROVIDER_1),
-        ServiceRequest(UUID.randomUUID().toString(), "Another custom SR for PenTesting", LocalDateTime.now(), CUSTOMER_1, PROVIDER_2),
-        ServiceRequest(UUID.randomUUID().toString(), "Request for Military R&D", LocalDateTime.now(), CUSTOMER_2, PROVIDER_3),
-        ServiceRequest(UUID.randomUUID().toString(), "My SR", LocalDateTime.now(), CUSTOMER_1, PROVIDER_2),
-        ServiceRequest(UUID.randomUUID().toString(), "Give me bananas!", LocalDateTime.now(), CUSTOMER_1, PROVIDER_4),
-        ServiceRequest(UUID.randomUUID().toString(), "Feel free to organize me", LocalDateTime.now(), CUSTOMER_2, PROVIDER_3)
+        ServiceRequest(UUID.randomUUID().toString(), "Custom Service Request for Training", LocalDateTime.parse("2021-02-16T18:50:03"), "DRAFT", CUSTOMER_1, PROVIDER_1),
+        ServiceRequest(UUID.randomUUID().toString(), "Another custom SR for PenTesting", LocalDateTime.parse("2021-02-16T18:49:12"), "SUBMITTED", CUSTOMER_1, PROVIDER_2),
+        ServiceRequest(UUID.randomUUID().toString(), "Request for Military R&D", LocalDateTime.parse("2021-02-16T12:53:17"), "NEGOTIATING", CUSTOMER_2, PROVIDER_3),
+        ServiceRequest(UUID.randomUUID().toString(), "My SR", LocalDateTime.parse("2021-02-16T07:49:38"), "NEGOTIATING", CUSTOMER_1, PROVIDER_2),
+        ServiceRequest(UUID.randomUUID().toString(), "Give me bananas!", LocalDateTime.parse("2021-02-15T14:52:39"), "SIGNED", CUSTOMER_1, PROVIDER_4),
+        ServiceRequest(UUID.randomUUID().toString(), "Feel free to organize me", LocalDateTime.parse("2021-01-30T09:00:15"), "ACTIVE", CUSTOMER_2, PROVIDER_3)
 )

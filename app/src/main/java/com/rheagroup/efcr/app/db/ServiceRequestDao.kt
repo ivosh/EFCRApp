@@ -2,8 +2,7 @@ package com.rheagroup.efcr.app.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.rheagroup.efcr.app.vo.ProvidedByConverter
-import com.rheagroup.efcr.app.vo.ServiceRequest
+import com.rheagroup.efcr.app.model.ServiceRequest
 
 @Dao
 interface ServiceRequestDao {

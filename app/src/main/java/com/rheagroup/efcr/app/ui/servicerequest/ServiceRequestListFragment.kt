@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.rheagroup.efcr.app.databinding.ServiceRequestsListBinding
-import com.rheagroup.efcr.app.vo.ServiceRequest
+import com.rheagroup.efcr.app.model.ServiceRequest
 
 class ServiceRequestListFragment : Fragment() {
     private lateinit var binding: ServiceRequestsListBinding

@@ -44,6 +44,7 @@ dependencies {
     implementation deps.core_ktx
     implementation deps.material
     implementation deps.navigation.fragment_ktx
+    implementation deps.pretty_time
     implementation deps.room.runtime
 
     kapt deps.room.compiler
