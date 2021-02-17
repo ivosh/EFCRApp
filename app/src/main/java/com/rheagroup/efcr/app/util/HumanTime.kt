@@ -1,8 +1,7 @@
 package com.rheagroup.efcr.app.util
 
-import org.ocpsoft.prettytime.PrettyTime
 import java.time.LocalDateTime
-import java.time.ZoneOffset
+import org.ocpsoft.prettytime.PrettyTime
 
 fun prettyPrintDateTime(dateTime: LocalDateTime): String {
     val prettyTime = PrettyTime()

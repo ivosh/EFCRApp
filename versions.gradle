@@ -66,7 +66,7 @@ ext.deps = deps
 
 
 // Repositories
-def addRepos(RepositoryHandler handler) {
+static def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
 }
