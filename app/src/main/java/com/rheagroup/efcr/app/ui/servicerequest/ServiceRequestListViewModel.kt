@@ -1,14 +1,14 @@
 package com.rheagroup.efcr.app.ui.servicerequest
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.rheagroup.efcr.app.repository.ServiceRequestRepository
 import com.rheagroup.efcr.app.model.ServiceRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ServiceRequestListViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository = ServiceRequestRepository(application) // :TODO: Use Dependency Injection
-
+@HiltViewModel
+class ServiceRequestListViewModel @Inject constructor(private val repository: ServiceRequestRepository) : ViewModel() {
     private val serviceRequests: LiveData<List<ServiceRequest>> = loadAllServiceRequests()
 
     fun getServiceRequests(): LiveData<List<ServiceRequest>> {

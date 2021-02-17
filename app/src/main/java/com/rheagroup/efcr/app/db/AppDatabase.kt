@@ -1,12 +1,9 @@
 package com.rheagroup.efcr.app.db
 
-import android.content.Context
 import android.os.AsyncTask
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.rheagroup.efcr.app.model.Customer
 import com.rheagroup.efcr.app.model.ProvidedBy
 import com.rheagroup.efcr.app.model.ProvidedByConverter
@@ -23,42 +20,11 @@ import java.util.*
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun serviceRequestDao(): ServiceRequestDao
+}
 
-    /**
-     * Singleton database object. :TODO: Use a Dependency Injection framework.
-     */
-    companion object {
-        @Volatile
-        private var instance: AppDatabase? = null
-
-        @Synchronized
-        fun get(context: Context): AppDatabase {
-            if (instance == null) {
-                instance = buildDatabase(context)
-            }
-            return instance!!
-        }
-
-
-        private fun buildDatabase(context: Context) =
-                Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "E-FCR.db")
-                        .allowMainThreadQueries() // :TODO: Remove this.
-                        .addCallback(object : RoomDatabase.Callback() {
-                            override fun onCreate(db: SupportSQLiteDatabase) {
-                                super.onCreate(db)
-                                instance?.run {
-                                    fillDatabase(this)
-                                }
-
-                            }
-                        })
-                        .build()
-
-        private fun fillDatabase(database: AppDatabase) {
-            AsyncTask.execute { // :TODO: use coroutine to delegate this to another thread
-                database.serviceRequestDao().insertAll(*SERVICE_REQUESTS)
-            }
-        }
+fun fillDatabase(database: AppDatabase) {
+    AsyncTask.execute { // :TODO: use coroutine to delegate this to another thread
+        database.serviceRequestDao().insertAll(*SERVICE_REQUESTS)
     }
 }
 

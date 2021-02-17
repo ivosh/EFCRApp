@@ -9,9 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.rheagroup.efcr.app.databinding.ServiceRequestsListBinding
 import com.rheagroup.efcr.app.model.ServiceRequest
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ServiceRequestListFragment : Fragment() {
     private lateinit var binding: ServiceRequestsListBinding
+    private val viewModel: ServiceRequestListViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -23,7 +26,6 @@ class ServiceRequestListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel: ServiceRequestListViewModel by viewModels()
         viewModel.getServiceRequests().observe(viewLifecycleOwner) { serviceRequests ->
             populateServiceRequests(serviceRequests)
         }
