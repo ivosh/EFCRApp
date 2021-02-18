@@ -1,4 +1,4 @@
-package com.rheagroup.efcr.app
+package com.rheagroup.efcr
 
 import org.junit.Test
 

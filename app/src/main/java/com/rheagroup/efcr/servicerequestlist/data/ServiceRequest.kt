@@ -1,4 +1,4 @@
-package com.rheagroup.efcr.app.model
+package com.rheagroup.efcr.servicerequestlist.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
@@ -9,17 +9,17 @@ import java.time.LocalDateTime
 
 @Entity(tableName = "service_requests")
 data class ServiceRequest(
-        @PrimaryKey val id: String, // is UUID
-        val name: String,
-        val date: LocalDateTime,
-        val status: String,
-        @Embedded(prefix = "customer_") val customer: Customer,
-        @Embedded(prefix = "provider_") val provider: Provider
+    @PrimaryKey val id: String, // is UUID
+    val name: String,
+    val date: LocalDateTime,
+    val status: String,
+    @Embedded(prefix = "customer_") val customer: Customer,
+    @Embedded(prefix = "provider_") val provider: Provider
 )
 
 data class Customer(
-        val id: String, // is UUID
-        val name: String
+    val id: String, // is UUID
+    val name: String
 )
 
 enum class ProvidedBy(val providedBy: String) {
@@ -28,12 +28,12 @@ enum class ProvidedBy(val providedBy: String) {
 }
 
 data class Provider(
-        @ColumnInfo(name = "provided_by")
-        val providedBy: ProvidedBy,
+    @ColumnInfo(name = "provided_by")
+    val providedBy: ProvidedBy,
 
-        val id: String, // is UUID
+    val id: String, // is UUID
 
-        val name: String
+    val name: String
 )
 
 class ProvidedByConverter {

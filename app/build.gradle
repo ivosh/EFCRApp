@@ -11,7 +11,7 @@ android {
     buildToolsVersion build_versions.build_tools
 
     defaultConfig {
-        applicationId "com.rheagroup.efcr.app"
+        applicationId "com.rheagroup.efcr"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
@@ -44,6 +44,7 @@ dependencies {
     implementation deps.constraint_layout
     implementation deps.core_ktx
     implementation deps.hilt.core
+    implementation deps.lifecycle.livedata
     implementation deps.material
     implementation deps.navigation.fragment_ktx
     implementation deps.pretty_time

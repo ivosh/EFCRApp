@@ -1,18 +1,19 @@
-package com.rheagroup.efcr.app.ui.servicerequest
+package com.rheagroup.efcr.servicerequestlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rheagroup.efcr.app.databinding.ServiceRequestListItemBinding
-import com.rheagroup.efcr.app.model.ServiceRequest
-import com.rheagroup.efcr.app.util.prettyPrintDateTime
+import com.rheagroup.efcr.databinding.ServiceRequestListItemBinding
+import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
+import com.rheagroup.efcr.util.prettyPrintDateTime
 
 class ServiceRequestListAdapter(private val serviceRequests: List<ServiceRequest>) :
-        RecyclerView.Adapter<ServiceRequestListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ServiceRequestListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ServiceRequestListItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false)
+            LayoutInflater.from(parent.context), parent, false
+        )
         return ViewHolder(binding)
     }
 
@@ -23,7 +24,7 @@ class ServiceRequestListAdapter(private val serviceRequests: List<ServiceRequest
     override fun getItemCount() = serviceRequests.size
 
     inner class ViewHolder(private val binding: ServiceRequestListItemBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(serviceRequest: ServiceRequest) {
             binding.serviceRequestItemName.text = serviceRequest.name
             binding.serviceRequestItemStatus.text = serviceRequest.status

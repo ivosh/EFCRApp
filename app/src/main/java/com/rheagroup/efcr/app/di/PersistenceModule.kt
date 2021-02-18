@@ -5,8 +5,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.rheagroup.efcr.app.db.AppDatabase
+import com.rheagroup.efcr.app.db.AppDatabase.Companion.DATABASE_NAME
 import com.rheagroup.efcr.app.db.fillDatabase
-import com.rheagroup.efcr.app.repository.ServiceRequestRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,13 +22,14 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object PersistenceModule {
     private lateinit var db: AppDatabase
 
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        db = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "E-FCR.db")
+        db =
+            Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DATABASE_NAME)
                 .allowMainThreadQueries() // :TODO: Remove this.
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(sqlDb: SupportSQLiteDatabase) {
@@ -41,19 +42,5 @@ object AppModule {
                 })
                 .build()
         return db
-    }
-}
-
-/**
- * The binding for ServiceRequestRepository is in its own module so that we can replace it easily in tests.
- */
-@Module
-@InstallIn(SingletonComponent::class)
-object TasksRepositoryModule {
-
-    @Singleton
-    @Provides
-    fun provideTasksRepository(db: AppDatabase): ServiceRequestRepository {
-        return ServiceRequestRepository(db)
     }
 }

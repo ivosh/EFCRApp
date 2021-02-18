@@ -1,4 +1,4 @@
-package com.rheagroup.efcr.app.ui.servicerequest
+package com.rheagroup.efcr.servicerequestlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
-import com.rheagroup.efcr.app.databinding.ServiceRequestsListBinding
-import com.rheagroup.efcr.app.model.ServiceRequest
+import com.rheagroup.efcr.databinding.ServiceRequestsListBinding
+import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +15,11 @@ class ServiceRequestListFragment : Fragment() {
     private lateinit var binding: ServiceRequestsListBinding
     private val viewModel: ServiceRequestListViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
         binding = ServiceRequestsListBinding.inflate(inflater, container, false)

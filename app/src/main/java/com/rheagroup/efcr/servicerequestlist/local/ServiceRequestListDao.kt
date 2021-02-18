@@ -1,11 +1,16 @@
-package com.rheagroup.efcr.app.db
+package com.rheagroup.efcr.servicerequestlist.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
-import com.rheagroup.efcr.app.model.ServiceRequest
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
+import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 
 @Dao
-interface ServiceRequestDao {
+interface ServiceRequestListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg serviceRequests: ServiceRequest)
 

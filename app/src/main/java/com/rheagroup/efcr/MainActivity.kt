@@ -1,8 +1,7 @@
-package com.rheagroup.efcr.app.ui
+package com.rheagroup.efcr
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.rheagroup.efcr.app.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

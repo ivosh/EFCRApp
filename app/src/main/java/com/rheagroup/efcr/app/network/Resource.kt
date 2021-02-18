@@ -1,4 +1,4 @@
-package com.rheagroup.efcr.app.model
+package com.rheagroup.efcr.app.network
 
 /**
  * A generic class that holds a value with its loading status.

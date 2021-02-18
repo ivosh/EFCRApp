@@ -1,4 +1,4 @@
-package com.rheagroup.efcr.app.model
+package com.rheagroup.efcr.app.network
 
 /**
  * Status of a resource that is provided to the UI.

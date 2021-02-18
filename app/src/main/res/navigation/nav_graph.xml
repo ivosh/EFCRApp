@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/serviceRequestListFragment"
-        android:name="com.rheagroup.efcr.app.ui.servicerequest.ServiceRequestListFragment"
+        android:name="com.rheagroup.efcr.servicerequestlist.ServiceRequestListFragment"
         android:label="service_request_list"
         tools:layout="@layout/service_requests_list" />
 
     <fragment
         android:id="@+id/sendMessageFragment"
-        android:name="com.rheagroup.efcr.app.ui.message.SendMessageFragment"
+        android:name="com.rheagroup.efcr.message.SendMessageFragment"
         android:label="send_message"
         tools:layout="@layout/send_message">
         <action
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/displayMessageFragment"
-        android:name="com.rheagroup.efcr.app.ui.message.DisplayMessageFragment"
+        android:name="com.rheagroup.efcr.message.DisplayMessageFragment"
         android:label="display_message"
         tools:layout="@layout/display_message" >
         <argument

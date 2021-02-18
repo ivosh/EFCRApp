@@ -1,4 +1,4 @@
-package com.rheagroup.efcr.app.util
+package com.rheagroup.efcr.util
 
 import java.time.LocalDateTime
 import org.ocpsoft.prettytime.PrettyTime
