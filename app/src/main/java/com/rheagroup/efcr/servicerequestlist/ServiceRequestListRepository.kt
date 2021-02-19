@@ -27,31 +27,31 @@ class ServiceRequestListRepository @Inject constructor(
     @ExperimentalCoroutinesApi
     fun getServiceRequests(): Flow<List<ServiceRequest>> {
         return localDao.loadAllSortedByDate()
-            .flowOn(Dispatchers.Default)
+            .flowOn(Dispatchers.IO) // Affects upstream (above) operators.
             .conflate() // Return the latest values.
     }
 
     suspend fun fetchServiceRequests(): Status {
-        val result = apiCall(Dispatchers.IO) { remoteApi.getServiceRequestList() }
-        if (result.status == Status.SUCCESS) {
-            val serviceRequestResponses = result.data!!.content
-            serviceRequestResponses.map { extractServiceRequest(it) }.run {
-                localDao.insertAll(this)
+        return withContext(Dispatchers.IO) {
+            val result = apiCall() { remoteApi.getServiceRequestList() }
+            if (result.status == Status.SUCCESS) {
+                val serviceRequestResponses = result.data!!.content
+                serviceRequestResponses.map { extractServiceRequest(it) }.run {
+                    localDao.insertAll(this)
+                }
             }
+            result.status
         }
-        return result.status
     }
 
-    private suspend fun <T> apiCall(
-        dispatcher: CoroutineDispatcher,
-        apiCall: suspend () -> T
-    ): Resource<T> {
-        return withContext(dispatcher) {
-            try {
-                Resource.success(apiCall())
-            } catch (exception: Exception) {
-                Resource.error(exception.message ?: "<no error given>", null) // :TODO: Have some classification of errors (network, http, auth) and pass it to the view
-            }
+    private suspend fun <T> apiCall(apiCall: suspend () -> T): Resource<T> {
+        return try {
+            Resource.success(apiCall())
+        } catch (exception: Exception) {
+            Resource.error(
+                exception.message ?: "<no error given>",
+                null
+            ) // :TODO: Have some classification of errors (network, http, auth) and pass it to the view
         }
     }
 

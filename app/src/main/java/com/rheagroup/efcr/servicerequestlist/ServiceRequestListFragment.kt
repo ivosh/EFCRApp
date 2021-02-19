@@ -1,6 +1,7 @@
 package com.rheagroup.efcr.servicerequestlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,13 +46,14 @@ class ServiceRequestListFragment : Fragment() {
         }
 
         viewModel.fetchStatus.observe(viewLifecycleOwner) {
-            when (it) { // :TODO: Display an error briefly
+            when (it) { // :TODO: Display an error briefly in snackbar.
                 Status.SUCCESS, Status.ERROR -> binding.serviceRequestList.isRefreshing = false
             }
         }
     }
 
     private fun populateServiceRequests(serviceRequests: List<ServiceRequest>) {
+        Log.d("ServiceRequestListFragment", "Populated service requests: $serviceRequests") // :TODO: Consider debug/release build.
         binding.serviceRequestListItems.adapter = ServiceRequestListAdapter(serviceRequests)
     }
 }

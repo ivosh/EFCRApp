@@ -31,7 +31,7 @@ object PersistenceModule {
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         database =
             Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DATABASE_NAME)
-                .allowMainThreadQueries() // :TODO: Remove this.
+                .fallbackToDestructiveMigration()
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(sqlDb: SupportSQLiteDatabase) {
                         super.onCreate(sqlDb)
