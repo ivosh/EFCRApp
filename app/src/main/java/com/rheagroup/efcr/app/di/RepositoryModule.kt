@@ -1,7 +1,9 @@
 package com.rheagroup.efcr.app.di
 
-import com.rheagroup.efcr.app.db.AppDatabase
+import com.rheagroup.efcr.app.network.TokenProvider
 import com.rheagroup.efcr.servicerequestlist.ServiceRequestListRepository
+import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
+import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +19,10 @@ object RepositoryModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideServiceRequestRepository(db: AppDatabase): ServiceRequestListRepository {
-        return ServiceRequestListRepository(db)
+    fun provideServiceRequestRepository(
+        localDao: ServiceRequestListDao,
+        remoteApi: ServiceRequestListApi,
+    ): ServiceRequestListRepository {
+        return ServiceRequestListRepository(localDao, remoteApi)
     }
 }

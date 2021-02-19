@@ -14,12 +14,13 @@ data class ServiceRequest(
     val date: LocalDateTime,
     val status: String,
     @Embedded(prefix = "customer_") val customer: Customer,
-    @Embedded(prefix = "provider_") val provider: Provider
+    @Embedded(prefix = "provider_") val provider: Provider?
 )
 
 data class Customer(
     val id: String, // is UUID
-    val name: String
+    val name: String,
+    val surname: String
 )
 
 enum class ProvidedBy(val providedBy: String) {
@@ -30,9 +31,7 @@ enum class ProvidedBy(val providedBy: String) {
 data class Provider(
     @ColumnInfo(name = "provided_by")
     val providedBy: ProvidedBy,
-
     val id: String, // is UUID
-
     val name: String
 )
 

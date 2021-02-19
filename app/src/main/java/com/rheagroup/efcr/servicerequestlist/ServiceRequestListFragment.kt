@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.rheagroup.efcr.app.network.Status
 import com.rheagroup.efcr.databinding.ServiceRequestsListBinding
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 class ServiceRequestListFragment : Fragment() {
@@ -29,12 +31,27 @@ class ServiceRequestListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getServiceRequests().observe(viewLifecycleOwner) { serviceRequests ->
+        subscribeObservers()
+
+        binding.serviceRequestList.setOnRefreshListener {
+            viewModel.fetchServiceRequests()
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    private fun subscribeObservers() {
+        viewModel.serviceRequests.observe(viewLifecycleOwner) { serviceRequests ->
             populateServiceRequests(serviceRequests)
+        }
+
+        viewModel.fetchStatus.observe(viewLifecycleOwner) {
+            when (it) { // :TODO: Display an error briefly
+                Status.SUCCESS, Status.ERROR -> binding.serviceRequestList.isRefreshing = false
+            }
         }
     }
 
     private fun populateServiceRequests(serviceRequests: List<ServiceRequest>) {
-        binding.serviceRequests.adapter = ServiceRequestListAdapter(serviceRequests)
+        binding.serviceRequestListItems.adapter = ServiceRequestListAdapter(serviceRequests)
     }
 }

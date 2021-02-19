@@ -10,6 +10,7 @@ import com.rheagroup.efcr.servicerequestlist.data.ProvidedByConverter
 import com.rheagroup.efcr.servicerequestlist.data.Provider
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
+import com.rheagroup.efcr.util.LocalDateTimeConverter
 import java.time.LocalDateTime
 import java.util.*
 
@@ -34,8 +35,8 @@ fun fillDatabase(database: AppDatabase) {
     }
 }
 
-val CUSTOMER_1 = Customer(UUID.randomUUID().toString(), "Kaarel Hanson")
-val CUSTOMER_2 = Customer(UUID.randomUUID().toString(), "Custo Mer")
+val CUSTOMER_1 = Customer(UUID.randomUUID().toString(), "Kaarel", "Hanson")
+val CUSTOMER_2 = Customer(UUID.randomUUID().toString(), "Custo", "Mer")
 
 val PROVIDER_1 = Provider(ProvidedBy.SINGLE_PROVIDER, UUID.randomUUID().toString(), "RHEA Group")
 val PROVIDER_2 = Provider(ProvidedBy.SINGLE_PROVIDER, UUID.randomUUID().toString(), "Guardtime")
@@ -65,7 +66,7 @@ val SERVICE_REQUESTS = arrayOf(
         LocalDateTime.parse("2021-02-16T12:53:17"),
         "NEGOTIATING",
         CUSTOMER_2,
-        PROVIDER_3
+        PROVIDER_1
     ),
     ServiceRequest(
         UUID.randomUUID().toString(),
@@ -73,7 +74,7 @@ val SERVICE_REQUESTS = arrayOf(
         LocalDateTime.parse("2021-02-16T07:49:38"),
         "NEGOTIATING",
         CUSTOMER_1,
-        PROVIDER_2
+        PROVIDER_3
     ),
     ServiceRequest(
         UUID.randomUUID().toString(),
@@ -89,6 +90,6 @@ val SERVICE_REQUESTS = arrayOf(
         LocalDateTime.parse("2021-01-30T09:00:15"),
         "ACTIVE",
         CUSTOMER_2,
-        PROVIDER_3
+        PROVIDER_2
     )
 )

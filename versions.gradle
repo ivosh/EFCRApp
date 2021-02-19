@@ -7,12 +7,16 @@ versions.constraint_layout = "2.0.4"
 versions.core_ktx = "1.3.2"
 versions.espresso = "3.3.0"
 versions.hilt = "2.31.2-alpha"
+versions.jackson = "2.12.1"
 versions.junit = "4.13.1"
 versions.lifecycle = '2.2.0'
+versions.logging_interceptor = "4.9.0"
 versions.material = "1.3.0"
 versions.navigation = "2.3.3"
 versions.pretty_time = "5.0.0.Final"
+versions.retrofit = "2.9.0"
 versions.room = "2.3.0-beta01"
+versions.swipe_refresh_layout = "1.1.0"
 ext.versions = versions
 
 // Build versions
@@ -47,11 +51,18 @@ hilt.core = "com.google.dagger:hilt-android:$versions.hilt"
 hilt.gradle_plugin = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
 deps.hilt = hilt
 
+def jackson = [:]
+jackson.kotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:$versions.jackson"
+jackson.jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$versions.jackson"
+deps.jackson = jackson
+
 deps.junit = "junit:junit:$versions.junit"
 
 def lifecycle = [:]
 lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
 deps.lifecycle = lifecycle
+
+deps.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor"
 
 deps.material = "com.google.android.material:material:$versions.material"
 
@@ -62,10 +73,18 @@ deps.navigation = navigation
 
 deps.pretty_time = "org.ocpsoft.prettytime:prettytime:$versions.pretty_time"
 
+def retrofit = [:]
+retrofit.core = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.jackson = "com.squareup.retrofit2:converter-jackson:$versions.retrofit"
+deps.retrofit = retrofit
+
 def room = [:]
-room.runtime = "androidx.room:room-runtime:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
+room.runtime = "androidx.room:room-runtime:$versions.room"
 deps.room = room
+
+deps.swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swipe_refresh_layout"
 
 ext.deps = deps
 

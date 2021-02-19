@@ -1,21 +1,34 @@
 package com.rheagroup.efcr.servicerequestlist
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.switchMap
+import com.rheagroup.efcr.app.network.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @HiltViewModel
 class ServiceRequestListViewModel @Inject constructor(private val repository: ServiceRequestListRepository) :
     ViewModel() {
-    private val serviceRequests: LiveData<List<ServiceRequest>> = loadAllServiceRequests()
 
-    fun getServiceRequests(): LiveData<List<ServiceRequest>> {
-        return serviceRequests
+    private val triggerFetchServiceRequests = MutableLiveData<Int>()
+    private val atomicInteger = AtomicInteger()
+
+    @ExperimentalCoroutinesApi
+    val serviceRequests = repository.getServiceRequests().asLiveData()
+
+    fun fetchServiceRequests() {
+        triggerFetchServiceRequests.value = atomicInteger.incrementAndGet()
     }
 
-    private fun loadAllServiceRequests(): LiveData<List<ServiceRequest>> {
-        return repository.loadServiceRequests()
+    val fetchStatus = triggerFetchServiceRequests.switchMap {
+        liveData {
+            emit(Status.LOADING)
+            emit(repository.fetchServiceRequests())
+        }
     }
 }
