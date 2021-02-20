@@ -9,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import kotlinx.coroutines.CoroutineDispatcher
 
 /**
  * Module to tell Hilt how to provide instances of types that cannot be constructor-injected.
@@ -22,7 +23,8 @@ object RepositoryModule {
     fun provideServiceRequestRepository(
         localDao: ServiceRequestListDao,
         remoteApi: ServiceRequestListApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): ServiceRequestListRepository {
-        return ServiceRequestListRepository(localDao, remoteApi)
+        return ServiceRequestListRepository(localDao, remoteApi, ioDispatcher)
     }
 }

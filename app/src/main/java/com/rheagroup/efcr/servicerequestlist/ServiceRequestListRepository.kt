@@ -1,6 +1,6 @@
 package com.rheagroup.efcr.servicerequestlist
 
-import android.util.Log
+import com.rheagroup.efcr.app.di.IoDispatcher
 import com.rheagroup.efcr.util.LocalDateTimeConverter
 import com.rheagroup.efcr.app.network.Resource
 import com.rheagroup.efcr.app.network.Status
@@ -11,7 +11,6 @@ import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestResponse
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.conflate
@@ -20,19 +19,20 @@ import kotlinx.coroutines.withContext
 
 class ServiceRequestListRepository @Inject constructor(
     private val localDao: ServiceRequestListDao,
-    private val remoteApi: ServiceRequestListApi
+    private val remoteApi: ServiceRequestListApi,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
     private val localDateTimeConverter = LocalDateTimeConverter()
 
     @ExperimentalCoroutinesApi
     fun getServiceRequests(): Flow<List<ServiceRequest>> {
         return localDao.loadAllSortedByDate()
-            .flowOn(Dispatchers.IO) // Affects upstream (above) operators.
+            .flowOn(ioDispatcher) // Affects upstream (above) operators.
             .conflate() // Return the latest values.
     }
 
     suspend fun fetchServiceRequests(): Status {
-        return withContext(Dispatchers.IO) {
+        return withContext(ioDispatcher) {
             val result = apiCall() { remoteApi.getServiceRequestList() }
             if (result.status == Status.SUCCESS) {
                 val serviceRequestResponses = result.data!!.content
