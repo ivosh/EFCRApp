@@ -19,7 +19,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:contentDescription="@string/echo_logo_drawable_description"
-            app:srcCompat="@drawable/ic_launcher_echo_logo2" />
+            android:src="@drawable/ic_launcher_echo_logo2" />
 
         <TextView
             android:id="@+id/echo_logo_title"
