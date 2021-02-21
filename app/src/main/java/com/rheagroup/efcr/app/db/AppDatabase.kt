@@ -1,6 +1,5 @@
 package com.rheagroup.efcr.app.db
 
-import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -13,6 +12,8 @@ import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.util.LocalDateTimeConverter
 import java.time.LocalDateTime
 import java.util.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Database(
     entities = [ServiceRequest::class],
@@ -30,7 +31,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 
 fun fillDatabase(database: AppDatabase) {
-    AsyncTask.execute { // :TODO: use coroutine to delegate this to another thread
+    GlobalScope.launch {
         database.serviceRequestListDao().insertAll(*SERVICE_REQUESTS)
     }
 }
