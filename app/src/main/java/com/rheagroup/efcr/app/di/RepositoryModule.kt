@@ -1,6 +1,5 @@
 package com.rheagroup.efcr.app.di
 
-import com.rheagroup.efcr.app.network.TokenProvider
 import com.rheagroup.efcr.servicerequestlist.ServiceRequestListRepository
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi

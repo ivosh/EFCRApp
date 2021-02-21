@@ -1,14 +1,15 @@
 package com.rheagroup.efcr.servicerequestlist
 
 import com.rheagroup.efcr.app.di.IoDispatcher
+import com.rheagroup.efcr.app.network.ApiResponse
 import com.rheagroup.efcr.util.LocalDateTimeConverter
-import com.rheagroup.efcr.app.network.Resource
-import com.rheagroup.efcr.app.network.Status
+import com.rheagroup.efcr.app.network.ResourceStatus
 import com.rheagroup.efcr.servicerequestlist.data.Customer
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestResponse
+import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class ServiceRequestListRepository @Inject constructor(
     private val localDao: ServiceRequestListDao,
@@ -31,27 +33,38 @@ class ServiceRequestListRepository @Inject constructor(
             .conflate() // Return the latest values.
     }
 
-    suspend fun fetchServiceRequests(): Status {
+    suspend fun fetchServiceRequests(): ResourceStatus {
         return withContext(ioDispatcher) {
-            val result = apiCall() { remoteApi.getServiceRequestList() }
-            if (result.status == Status.SUCCESS) {
-                val serviceRequestResponses = result.data!!.content
+            val response = apiCall { remoteApi.getServiceRequestList() }
+            if (response.kind == ApiResponse.Kind.SUCCESS) {
+                val serviceRequestResponses = response.data!!.content
                 serviceRequestResponses.map { extractServiceRequest(it) }.run {
                     localDao.insertAll(this)
                 }
             }
-            result.status
+            response.toResourceStatus()
         }
     }
 
-    private suspend fun <T> apiCall(apiCall: suspend () -> T): Resource<T> {
+    private suspend fun <T> apiCall(apiCall: suspend () -> T): ApiResponse<T> {
         return try {
-            Resource.success(apiCall())
+            ApiResponse.success(apiCall())
         } catch (exception: Exception) {
-            Resource.error(
-                exception.message ?: "<no error given>",
-                null
-            ) // :TODO: Have some classification of errors (network, http, auth) and pass it to the view
+            when (exception) {
+                is IOException -> ApiResponse.networkError(
+                    exception.message ?: "network problem"
+                )
+                is HttpException -> {
+                    if (exception.code() == 401) {
+                        ApiResponse.authenticationError(
+                            exception.message ?: "authentication problem"
+                        )
+                    } else {
+                        ApiResponse.apiError(exception.message ?: "API problem")
+                    }
+                }
+                else -> ApiResponse.genericError(exception.message ?: "generic error")
+            }
         }
     }
 

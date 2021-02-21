@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.rheagroup.efcr.app.network.Status
+import com.rheagroup.efcr.app.network.ResourceStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
@@ -27,7 +27,7 @@ class ServiceRequestListViewModel @Inject constructor(private val repository: Se
 
     val fetchStatus = triggerFetchServiceRequests.switchMap {
         liveData {
-            emit(Status.LOADING)
+            emit(ResourceStatus.loading())
             emit(repository.fetchServiceRequests())
         }
     }

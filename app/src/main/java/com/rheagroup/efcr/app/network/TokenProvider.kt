@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import javax.inject.Inject
 
-class TokenProvider @Inject constructor(private val context: Context) {
+class TokenProvider @Inject constructor(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("tokens", Context.MODE_PRIVATE)
 
