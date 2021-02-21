@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.rheagroup.efcr.databinding.ServiceRequestsListBinding
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +48,9 @@ class ServiceRequestListFragment : Fragment() {
             if (it.isFinal()) {
                 binding.serviceRequestList.isRefreshing = false
             }
-            // :TODO: Display an error briefly in a snackbar.
+            if (it.isError()) {
+                Snackbar.make(binding.root, it.message!!, Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 
