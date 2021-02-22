@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/serviceRequestListFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -19,7 +19,11 @@
         android:id="@+id/serviceRequestListFragment"
         android:name="com.rheagroup.efcr.servicerequestlist.ServiceRequestListFragment"
         android:label="service_request_list"
-        tools:layout="@layout/service_requests_list" />
+        tools:layout="@layout/service_requests_list" >
+        <action
+            android:id="@+id/action_loggedOut"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/sendMessageFragment"

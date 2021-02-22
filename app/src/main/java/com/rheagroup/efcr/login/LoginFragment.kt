@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.rheagroup.efcr.app.network.ResourceStatus
 import com.rheagroup.efcr.databinding.LoginBinding
@@ -55,6 +56,7 @@ class LoginFragment : Fragment() {
             }
             if (it.kind == ResourceStatus.Kind.SUCCESS) {
                 Snackbar.make(binding.root, "Successful login!", Snackbar.LENGTH_LONG).show()
+                findNavController().popBackStack()
             }
         }
 

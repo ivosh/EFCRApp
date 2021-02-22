@@ -26,8 +26,9 @@ class LoginRepository @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
     // In-memory cache of the logged-in state.
+    // :TODO: Think about some persistence (encrypted SharedPreferences?).
     private val loggedInState: MutableStateFlow<LoggedInState> =
-        MutableStateFlow(LoggedInState.LoggedOut())
+        MutableStateFlow(LoggedInState.loggedOut())
 
     fun getLoggedInState() = loggedInState.asSharedFlow()
 
@@ -43,7 +44,7 @@ class LoginRepository @Inject constructor(
 
     suspend fun logout() {
         return withContext(ioDispatcher) {
-            loggedInState.emit(LoggedInState.LoggedOut())
+            loggedInState.emit(LoggedInState.loggedOut())
             tokenProvider.removeToken()
             remoteApi.logout()
         }
@@ -60,6 +61,6 @@ class LoginRepository @Inject constructor(
 
     private suspend fun setLoggedInUser(user: LoggedInUser) {
         tokenProvider.storeToken(user.accessToken)
-        loggedInState.emit(LoggedInState.LoggedIn(user))
+        loggedInState.emit(LoggedInState.loggedIn(user))
     }
 }
