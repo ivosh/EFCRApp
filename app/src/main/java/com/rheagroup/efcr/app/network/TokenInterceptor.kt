@@ -6,13 +6,16 @@ import okhttp3.Response
 class TokenInterceptor(private val tokenProvider: TokenProvider) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val requestBuilder = chain.request().newBuilder()
+        val request = chain.request()
 
-        tokenProvider.getToken()?.let {
-            requestBuilder.addHeader("Authorization", "Bearer $it")
-
+        if ((request.url.encodedPath == "/api/v1/auth/token") && (request.method == "POST")) {
+            return chain.proceed(request)
         }
 
+        val requestBuilder = request.newBuilder()
+        tokenProvider.getToken()?.let {
+            requestBuilder.addHeader("Authorization", "Bearer $it")
+        }
         return chain.proceed(requestBuilder.build())
     }
 }

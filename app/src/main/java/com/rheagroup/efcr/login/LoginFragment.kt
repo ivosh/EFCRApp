@@ -53,6 +53,9 @@ class LoginFragment : Fragment() {
             if (it.isError()) {
                 Snackbar.make(binding.root, it.message!!, Snackbar.LENGTH_LONG).show()
             }
+            if (it.kind == ResourceStatus.Kind.SUCCESS) {
+                Snackbar.make(binding.root, "Successful login!", Snackbar.LENGTH_LONG).show()
+            }
         }
 
         binding.loginEmail.addTextChangedListener(afterTextChangedListener)
