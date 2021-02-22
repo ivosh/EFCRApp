@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.rheagroup.efcr.BuildConfig
 import com.rheagroup.efcr.app.network.TokenInterceptor
 import com.rheagroup.efcr.app.network.TokenProvider
+import com.rheagroup.efcr.login.network.LoginApi
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
 import dagger.Module
 import dagger.Provides
@@ -68,6 +69,11 @@ object NetworkModule {
     fun provideTokenInterceptor(tokenProvider: TokenProvider): TokenInterceptor {
         return TokenInterceptor(tokenProvider)
     }
+
+    @Provides
+    @Singleton
+    fun provideLoginApi(retrofit: Retrofit): LoginApi =
+        retrofit.create(LoginApi::class.java)
 
     @Provides
     @Singleton

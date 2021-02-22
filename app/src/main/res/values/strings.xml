@@ -7,6 +7,13 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
 
+    <string name="login_email">Email</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_invalid_username">"Invalid username"</string>
+    <string name="login_invalid_password">"Invalid password"</string>
+    <string name="login_password">Password</string>
+    <string name="login_sign_in">Sign in</string>
+
     <string name="service_request_item_name_placeholder">__service request name placeholder__</string>
     <string name="service_request_item_date_placeholder">__date__</string>
     <string name="service_request_item_status_placeholder">__status__</string>

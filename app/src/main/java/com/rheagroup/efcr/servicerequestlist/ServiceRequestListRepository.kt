@@ -4,12 +4,12 @@ import com.rheagroup.efcr.app.di.IoDispatcher
 import com.rheagroup.efcr.app.network.ApiResponse
 import com.rheagroup.efcr.util.LocalDateTimeConverter
 import com.rheagroup.efcr.app.network.ResourceStatus
+import com.rheagroup.efcr.app.network.apiCall
 import com.rheagroup.efcr.servicerequestlist.data.Customer
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestResponse
-import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 class ServiceRequestListRepository @Inject constructor(
     private val localDao: ServiceRequestListDao,
@@ -43,28 +42,6 @@ class ServiceRequestListRepository @Inject constructor(
                 }
             }
             response.toResourceStatus()
-        }
-    }
-
-    private suspend fun <T> apiCall(apiCall: suspend () -> T): ApiResponse<T> {
-        return try {
-            ApiResponse.success(apiCall())
-        } catch (exception: Exception) {
-            when (exception) {
-                is IOException -> ApiResponse.networkError(
-                    exception.message ?: "network problem"
-                )
-                is HttpException -> {
-                    if (exception.code() == 401) {
-                        ApiResponse.authenticationError(
-                            exception.message ?: "authentication problem"
-                        )
-                    } else {
-                        ApiResponse.apiError(exception.message ?: "API problem")
-                    }
-                }
-                else -> ApiResponse.genericError(exception.message ?: "generic error")
-            }
         }
     }
 

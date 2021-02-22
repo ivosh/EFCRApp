@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import javax.inject.Inject
 
+// :TODO: Use encrypted SharedPrerefences.
 class TokenProvider @Inject constructor(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("tokens", Context.MODE_PRIVATE)
@@ -15,6 +16,10 @@ class TokenProvider @Inject constructor(context: Context) {
 
     fun storeToken(token: String) {
         sharedPreferences.edit { putString(KEY_NAME, token) }
+    }
+
+    fun removeToken() {
+        sharedPreferences.edit { remove(KEY_NAME) }
     }
 
     companion object {

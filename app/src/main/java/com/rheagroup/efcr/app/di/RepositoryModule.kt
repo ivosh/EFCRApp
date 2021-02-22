@@ -1,5 +1,8 @@
 package com.rheagroup.efcr.app.di
 
+import com.rheagroup.efcr.app.network.TokenProvider
+import com.rheagroup.efcr.login.LoginRepository
+import com.rheagroup.efcr.login.network.LoginApi
 import com.rheagroup.efcr.servicerequestlist.ServiceRequestListRepository
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
@@ -16,6 +19,16 @@ import kotlinx.coroutines.CoroutineDispatcher
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 object RepositoryModule {
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideLoginRepository(
+        tokenProvider: TokenProvider,
+        remoteApi: LoginApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): LoginRepository {
+        return LoginRepository(tokenProvider, remoteApi, ioDispatcher)
+    }
 
     @Provides
     @ActivityRetainedScoped
