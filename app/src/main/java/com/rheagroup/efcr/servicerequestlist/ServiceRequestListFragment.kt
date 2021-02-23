@@ -6,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.rheagroup.efcr.R
 import com.rheagroup.efcr.databinding.ServiceRequestsListBinding
 import com.rheagroup.efcr.login.LoginViewModel
 import com.rheagroup.efcr.login.data.LoggedInState
-import com.rheagroup.efcr.message.SendMessageFragmentDirections
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi

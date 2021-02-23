@@ -11,7 +11,7 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        Handler().postDelayed({ redirect()}, 1500L)
+        Handler().postDelayed({ redirect() }, 1500L)
     }
 
     private fun redirect() {

@@ -12,7 +12,9 @@ import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @HiltViewModel
-class ServiceRequestListViewModel @Inject constructor(private val repository: ServiceRequestListRepository) :
+class ServiceRequestListViewModel @Inject constructor(
+    private val repository: ServiceRequestListRepository
+) :
     ViewModel() {
 
     private val triggerFetchServiceRequests = MutableLiveData<Int>()

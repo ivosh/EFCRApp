@@ -11,7 +11,7 @@ import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.util.LocalDateTimeConverter
 import java.time.LocalDateTime
-import java.util.*
+import java.util.UUID
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -28,7 +28,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun serviceRequestListDao(): ServiceRequestListDao
 }
-
 
 fun fillDatabase(database: AppDatabase) {
     GlobalScope.launch {

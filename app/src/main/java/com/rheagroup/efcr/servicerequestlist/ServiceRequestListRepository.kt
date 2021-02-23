@@ -2,7 +2,6 @@ package com.rheagroup.efcr.servicerequestlist
 
 import com.rheagroup.efcr.app.di.IoDispatcher
 import com.rheagroup.efcr.app.network.ApiResponse
-import com.rheagroup.efcr.util.LocalDateTimeConverter
 import com.rheagroup.efcr.app.network.ResourceStatus
 import com.rheagroup.efcr.app.network.apiCall
 import com.rheagroup.efcr.servicerequestlist.data.Customer
@@ -10,6 +9,7 @@ import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestResponse
+import com.rheagroup.efcr.util.LocalDateTimeConverter
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi

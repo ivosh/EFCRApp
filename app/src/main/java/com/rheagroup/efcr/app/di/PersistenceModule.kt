@@ -38,7 +38,6 @@ object PersistenceModule {
                         database.run {
                             fillDatabase(this)
                         }
-
                     }
                 })
                 .build()
