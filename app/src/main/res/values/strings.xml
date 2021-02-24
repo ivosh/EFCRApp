@@ -4,9 +4,6 @@
     <string name="echo_logo_title">ECHO</string>
     <string name="echo_logo_text">European network of cybersecurity centres and competence hub for innovation and operations</string>
 
-    <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
-
     <string name="login_email">Email</string>
     <string name="login_failed">"Login failed"</string>
     <string name="login_invalid_username">"Invalid username"</string>
@@ -17,4 +14,5 @@
     <string name="service_request_item_name_placeholder">__service request name placeholder__</string>
     <string name="service_request_item_date_placeholder">__date__</string>
     <string name="service_request_item_status_placeholder">__status__</string>
+    <string name="service_request_button_sign">Sign</string>
 </resources>

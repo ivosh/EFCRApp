@@ -28,11 +28,4 @@
     <style name="ProgressBarTheme" parent="android:Widget.ProgressBar">
         <item name="colorAccent">?attr/colorPrimary</item>
     </style>
-
-    <style name="ResponseTextView" parent="@android:style/TextAppearance.Small">
-        <item name="android:background">?attr/colorSecondary</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">?attr/colorOnSecondary</item>
-    </style>
 </resources>

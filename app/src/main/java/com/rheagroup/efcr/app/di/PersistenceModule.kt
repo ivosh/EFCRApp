@@ -7,6 +7,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.rheagroup.efcr.app.db.AppDatabase
 import com.rheagroup.efcr.app.db.AppDatabase.Companion.DATABASE_NAME
 import com.rheagroup.efcr.app.db.fillDatabase
+import com.rheagroup.efcr.servicerequestdetail.local.ServiceRequestDetailDao
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import dagger.Module
 import dagger.Provides
@@ -48,4 +49,9 @@ object PersistenceModule {
     @Provides
     fun provideServiceRequestListDao(db: AppDatabase): ServiceRequestListDao =
         db.serviceRequestListDao()
+
+    @Singleton
+    @Provides
+    fun provideServiceRequestDetailDao(db: AppDatabase): ServiceRequestDetailDao =
+        db.serviceRequestDetailDao()
 }

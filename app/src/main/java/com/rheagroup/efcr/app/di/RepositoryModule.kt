@@ -3,6 +3,8 @@ package com.rheagroup.efcr.app.di
 import com.rheagroup.efcr.app.network.TokenProvider
 import com.rheagroup.efcr.login.LoginRepository
 import com.rheagroup.efcr.login.network.LoginApi
+import com.rheagroup.efcr.servicerequestdetail.ServiceRequestDetailRepository
+import com.rheagroup.efcr.servicerequestdetail.local.ServiceRequestDetailDao
 import com.rheagroup.efcr.servicerequestlist.ServiceRequestListRepository
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
@@ -32,7 +34,16 @@ object RepositoryModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideServiceRequestRepository(
+    fun provideServiceRequestDetailRepository(
+        localDao: ServiceRequestDetailDao,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): ServiceRequestDetailRepository {
+        return ServiceRequestDetailRepository(localDao, ioDispatcher)
+    }
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideServiceRequestListRepository(
         localDao: ServiceRequestListDao,
         remoteApi: ServiceRequestListApi,
         @IoDispatcher ioDispatcher: CoroutineDispatcher

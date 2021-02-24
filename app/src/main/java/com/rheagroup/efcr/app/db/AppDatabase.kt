@@ -3,6 +3,7 @@ package com.rheagroup.efcr.app.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.rheagroup.efcr.servicerequestdetail.local.ServiceRequestDetailDao
 import com.rheagroup.efcr.servicerequestlist.data.Customer
 import com.rheagroup.efcr.servicerequestlist.data.ProvidedBy
 import com.rheagroup.efcr.servicerequestlist.data.ProvidedByConverter
@@ -26,6 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
         const val DATABASE_NAME = "E-FCR.db"
     }
 
+    abstract fun serviceRequestDetailDao(): ServiceRequestDetailDao
     abstract fun serviceRequestListDao(): ServiceRequestListDao
 }
 

@@ -9,7 +9,7 @@
         android:id="@+id/loginFragment"
         android:name="com.rheagroup.efcr.login.LoginFragment"
         android:label="login"
-        tools:layout="@layout/login" >
+        tools:layout="@layout/login">
         <action
             android:id="@+id/action_login"
             app:destination="@id/serviceRequestListFragment" />
@@ -19,31 +19,24 @@
         android:id="@+id/serviceRequestListFragment"
         android:name="com.rheagroup.efcr.servicerequestlist.ServiceRequestListFragment"
         android:label="service_request_list"
-        tools:layout="@layout/service_requests_list" >
+        tools:layout="@layout/service_request_list">
         <action
             android:id="@+id/action_loggedOut"
             app:destination="@id/loginFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/sendMessageFragment"
-        android:name="com.rheagroup.efcr.message.SendMessageFragment"
-        android:label="send_message"
-        tools:layout="@layout/send_message">
         <action
-            android:id="@+id/action_sendMessage"
-            app:destination="@id/displayMessageFragment"
+            android:id="@+id/action_showServiceRequestDetail"
+            app:destination="@id/serviceRequestDetailFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
-        android:id="@+id/displayMessageFragment"
-        android:name="com.rheagroup.efcr.message.DisplayMessageFragment"
-        android:label="display_message"
-        tools:layout="@layout/display_message" >
+        android:id="@+id/serviceRequestDetailFragment"
+        android:name="com.rheagroup.efcr.servicerequestdetail.ServiceRequestDetailFragment"
+        android:label="service_request_detail"
+        tools:layout="@layout/service_request_detail">
         <argument
-            android:name="message"
+            android:name="serviceRequestId"
             app:argType="string" />
     </fragment>
 </navigation>

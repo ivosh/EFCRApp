@@ -31,7 +31,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/round_corners"
             android:text="@string/service_request_item_status_placeholder"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textSize="@dimen/item_text_size" />
     </LinearLayout>
 
     <TextView
@@ -41,6 +42,7 @@
         android:text="@string/service_request_item_name_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/serviceRequestItemHeading" />
+        app:layout_constraintTop_toBottomOf="@+id/serviceRequestItemHeading"
+        android:textSize="@dimen/item_text_size" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
