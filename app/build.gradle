@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation deps.biometric
     implementation deps.constraint_layout
     implementation deps.core_ktx
     implementation deps.hilt.core
