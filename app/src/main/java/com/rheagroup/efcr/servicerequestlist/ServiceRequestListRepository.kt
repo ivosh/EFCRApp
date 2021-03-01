@@ -7,6 +7,7 @@ import com.rheagroup.efcr.app.network.apiCall
 import com.rheagroup.efcr.servicerequestlist.data.Customer
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
+import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestData
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestListApi
 import com.rheagroup.efcr.servicerequestlist.network.ServiceRequestResponse
 import com.rheagroup.efcr.util.LocalDateTimeConverter
@@ -46,11 +47,13 @@ class ServiceRequestListRepository @Inject constructor(
     }
 
     private fun extractServiceRequest(response: ServiceRequestResponse): ServiceRequest {
-        val customer =
-            Customer(response.customer.id, response.customer.name, response.customer.surname)
+        val serviceRequestData: ServiceRequestData =
+            (response.initialServiceRequestData ?: response.proposals?.get(0)?.serviceRequestData)!!
+        val customer = with(serviceRequestData.customer) { Customer(id, name, surname) }
+
         return ServiceRequest(
             id = response.id,
-            name = response.name,
+            name = serviceRequestData.name,
             date = localDateTimeConverter.toLocalDateTime(response.created), // :TODO: Use a different formatter that works with milliseconds. Better: annotate ServiceRequestResponse with that formatter.
             status = response.serviceRequestStatus.status,
             customer = customer,
