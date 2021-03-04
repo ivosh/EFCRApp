@@ -86,7 +86,7 @@ class ServiceRequestDetailFragment : Fragment() {
                 // Prompts the user to create credentials that your app accepts.
                 // :TODO: On Android 11 (SDK 30) we should use ACTION_BIOMETRIC_ENROLL with an extra.
                 val enrollIntent = Intent(Settings.ACTION_FINGERPRINT_ENROLL)
-                startActivity(enrollIntent);
+                startActivity(enrollIntent)
             }
         }
         return false

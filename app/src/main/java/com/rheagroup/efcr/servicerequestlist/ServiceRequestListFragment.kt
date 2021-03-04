@@ -13,8 +13,8 @@ import com.rheagroup.efcr.login.LoginViewModel
 import com.rheagroup.efcr.login.data.LoggedInState
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.LazyThreadSafetyMode.NONE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlin.LazyThreadSafetyMode.NONE
 
 @AndroidEntryPoint
 class ServiceRequestListFragment : Fragment() {

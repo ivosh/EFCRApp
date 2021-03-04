@@ -10,11 +10,11 @@ import com.rheagroup.efcr.login.data.LoggedInState
 import com.rheagroup.efcr.login.data.LoggedInUser
 import com.rheagroup.efcr.login.network.LoginApi
 import com.rheagroup.efcr.login.network.LoginResponse
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * Class that requests authentication and user information from the remote data source and

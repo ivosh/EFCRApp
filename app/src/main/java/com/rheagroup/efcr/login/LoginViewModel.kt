@@ -9,9 +9,9 @@ import androidx.lifecycle.switchMap
 import com.rheagroup.efcr.R
 import com.rheagroup.efcr.app.network.ResourceStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val repository: LoginRepository) : ViewModel() {

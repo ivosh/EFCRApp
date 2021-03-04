@@ -11,10 +11,10 @@ import com.rheagroup.efcr.servicerequestlist.data.Provider
 import com.rheagroup.efcr.servicerequestlist.data.ServiceRequest
 import com.rheagroup.efcr.servicerequestlist.local.ServiceRequestListDao
 import com.rheagroup.efcr.util.LocalDateTimeConverter
-import java.time.LocalDateTime
-import java.util.UUID
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.util.UUID
 
 @Database(
     entities = [ServiceRequest::class],

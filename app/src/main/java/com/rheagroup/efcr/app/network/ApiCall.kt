@@ -1,7 +1,7 @@
 package com.rheagroup.efcr.app.network
 
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 suspend fun <T> apiCall(apiCall: suspend () -> T): ApiResponse<T> {
     return try {

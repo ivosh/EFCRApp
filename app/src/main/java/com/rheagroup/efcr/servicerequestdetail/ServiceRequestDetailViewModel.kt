@@ -3,8 +3,8 @@ package com.rheagroup.efcr.servicerequestdetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @HiltViewModel
 class ServiceRequestDetailViewModel @Inject constructor(
